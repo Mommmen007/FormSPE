@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
 
 
 const Form =  mongoose.model('Form' , new mongoose.Schema(
@@ -10,11 +10,12 @@ const Form =  mongoose.model('Form' , new mongoose.Schema(
         Questions : [
             {
                 type : mongoose.Schema.Types.ObjectId,
-                ref:'Questions'
+                ref:'Question'
             }
         ]
     }
 ));
+
 
 const Questions = mongoose.model('Question' , new mongoose.Schema(
     {
@@ -41,7 +42,7 @@ const Answer = mongoose.model('Answer' , new mongoose.Schema(
                 {
                 Ques : {
                     type : mongoose.Schema.Types.ObjectId,
-                    ref:'Questions'
+                    ref:'Question'
                 },
                 Ans : {
                     type : String 
@@ -50,7 +51,7 @@ const Answer = mongoose.model('Answer' , new mongoose.Schema(
         ],
         User:{
             type : mongoose.Schema.Types.ObjectId,
-            ref:'Users'
+            ref:'User'
         }
     }
 ));

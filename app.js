@@ -3,76 +3,97 @@
 const express = require("express");
 const app = express();
 const port = 4000;
-app.set("view engine", "ejs");
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
-
-
-// mongoooose
 const mongoose = require("mongoose");
 
-const { Form, Questions, Users, Answer } = require("./Model/Schema");
-
+// mongoooose
 mongoose
   .connect(
-    "mongodb+srv://alihassan:c4a@cluster0.nbh8ilt.mongodb.net/Formapp?retryWrites=true&w=majority"
+    "mongodb://127.0.0.1:27017/FormDB"
   )
   .then(() => console.log("Connecting to DB....."))
   .catch((e) => console.error("Could not to connect to mongoDB...", e));
+require("./Model/Schema");
 
-async function saveForm(Title, ispublished) {
-  let form = new Form({
-    Title,
-    ispublished,
-  });
 
-  //form.update({ $push: { Questions: Question._id } });
-  await form.save();
-}
 
-async function SaveQuestion(Content, Type) {
-  const Question = new Questions({
-    Content,
-    Type,
-  });
+const formRoute = require('./routes/form');
+app.set("view engine", "ejs");
+app.use(express.json());
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use("/form" , formRoute);
+app.listen(port,()=> {console.log("listen to port............")})
 
-  await Question.save();
-}
 
-async function addQuestion(Formid, ques) {
-  await Form.findByIdAndUpdate(Formid, { $push: { Questions: ques } });
-}
 
-async function CreateUser(Name, Email, phonenumber) {
-  const User = new Users({
-    Name,
-    phonenumber,
-    Email,
-  });
 
-  await User.save();
-}
 
-async function addFormToUser(userid, formid) {
-  await Users.findByIdAndUpdate(userid, {
-    $push: { Form: formid },
-  });
-}
 
-async function CreateAnswer(content, userid) {
-  const answer = new Answer({});
 
-  await answer.save();
+  
 
-  await answer.update({
-    $set: {
-      Content: content,
-    },
-    $push: {
-      User: userid,
-    },
-  });
-}
+ 
+
+
+  
+
+
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// async function saveForm(Title, ispublished) {
+//   let form = new Form({
+//     Title,
+//     ispublished,
+//   });
+
+//   //form.update({ $push: { Questions: Question._id } });
+//   await form.save();
+// }
+
+// async function SaveQuestion(Content, Type) {
+//   const Question = new Questions({
+//     Content,
+//     Type,
+//   });
+
+//   await Question.save();
+// }
+
+// async function addQuestion(Formid, ques) {
+//   await Form.findByIdAndUpdate(Formid, { $push: { Questions: ques } });
+// }
+
+// async function CreateUser(Name, Email, phonenumber) {
+//   const User = new Users({
+//     Name,
+//     phonenumber,
+//     Email,
+//   });
+
+//   await User.save();
+// }
+
+// async function addFormToUser(userid, formid) {
+//   await Users.findByIdAndUpdate(userid, {
+//     $push: { Form: formid },
+//   });
+// }
+
+// async function CreateAnswer(content, userid) {
+//   const answer = new Answer({});
+
+//   await answer.save();
+
+//   await answer.update({
+//     $set: {
+//       Content: content,
+//     },
+//     $push: {
+//       User: userid,
+//     },
+//   });
+// }
 //let ans = [{Ques :'640ddee21a76f9319f69e195' , Ans :'25'} , {Ques :'640ddee21a76f9319f69e195' , Ans :'25'} , {Ques :'640ddee21a76f9319f69e195' , Ans :'25'}];
 
 // ans.forEach(element => {
