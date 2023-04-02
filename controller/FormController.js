@@ -1,4 +1,8 @@
-const Schema = require("../Model/Schema");   /// TO IMPORT Schema & Models
+const { Answer, Questions } = require("../Model/Schema");
+
+ require("../Model/Schema");   /// TO IMPORT Schema & Models
+
+
 
 const form_index_get = (req, res) => {
     
@@ -26,7 +30,17 @@ const form_index_get = (req, res) => {
       });
   };
 
+
+  
+
+  
+      
+      
+  
+
+  
+
 module.exports = {
   form_index_get,
-  answer_post
+  answer_post, 
 };

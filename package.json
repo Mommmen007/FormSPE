@@ -1,7 +1,6 @@
 {
   "name": "demo",
   "version": "1.0.0",
-  "description": "",
   "main": "service.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,8 +12,18 @@
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "joi": "^17.9.1",
     "mongoose": "^6.10.0",
     "nodemon": "^2.0.20",
     "underscore": "^1.13.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mommmen007/FormSPE.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mommmen007/FormSPE/issues"
+  },
+  "homepage": "https://github.com/Mommmen007/FormSPE#readme",
+  "description": ""
 }
