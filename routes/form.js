@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Schema = require('../controller/FormController')
 const Answer = require('../controller/AnswerController')
+const Ques_Form = require('../controller/QuestionController')
 
 
 // PATH start with '/form'
@@ -13,6 +14,8 @@ router.post("/after-submit", Schema.answer_post);
 router.get("/getAnswerUser", Answer.answerFromUser );
 
 router.post("/addanswer" , Answer.addAnswer);
+
+router.post("/createForm" , Ques_Form.CreateQuestion)
 
 
   
